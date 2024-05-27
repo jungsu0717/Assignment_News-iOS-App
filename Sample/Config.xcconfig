@@ -1,0 +1,15 @@
+//
+//  Config.xcconfig
+//  Sample
+//
+//  Created by Julian on 5/25/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BaseUrl = https:/$()/newsapi.org/v2/top-headlines?country=kr&apiKey=
+APIKey = 1ba9751e56954dd4bc6d97930b55154d
+
+//var baseUrl = "
+//var apiKey = ""
