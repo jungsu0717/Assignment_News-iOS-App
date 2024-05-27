@@ -12,7 +12,20 @@ struct DetailWebView: View {
     var itemDetail: ItemDetail
     
     init(_ itemDetail : ItemDetail) {
+        
         self.itemDetail = itemDetail
+        
+        let realmManager = RealmManager.instance
+        let savedData = realmManager.read(NewsLocalData.self)
+        
+        let localData = savedData.first { data in data.title == itemDetail.title }
+        
+        self.itemDetail.isChecked = true
+        if let data = localData {
+            realmManager.update(data) { item in
+                item.isChecked = true
+            }
+        }
     }
     
     var body: some View {

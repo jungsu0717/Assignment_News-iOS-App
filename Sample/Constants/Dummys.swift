@@ -16,7 +16,8 @@ struct Dummys {
         url: "https://www.gamemeca.com/view.php?gid=1749199",
         urlToImage: "https://cdn.gamemeca.com/gmdata/0001/749/199/gm234699_pc_sn.jpg",
         publishedAt: "2024-05-23T08:37:07Z",
-        content: "내용"
+        content: "내용",
+        isChecked: false
     )
     
     static let itemModelDummy = ItemModel(status: "ok", totalCnt: 34, items: [ItemDetail.getDummy()])

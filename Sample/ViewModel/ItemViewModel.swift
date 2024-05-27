@@ -23,6 +23,9 @@ class ItemViewModel: ObservableObject {
     @Published var orientation = UIDevice.current.orientation
     @Published var beforeOrientation = UIDevice.current.orientation
     
+    private let realmManager = RealmManager.instance
+    private let dateUtils = DateUtils.instance
+    
     enum ToggleState: Int {
         case gallery = 0
         case list = 1
@@ -32,30 +35,80 @@ class ItemViewModel: ObservableObject {
      let APIKey = Bundle.main.infoDictionary?["APIKey"] as! String
     
     init() {
-        fetchNews()
+        // 네트워크 가능할 때
+        if NetworkReachabilityManager()?.isReachable ?? false {
+            print("#### 네트워크 가능 ")
+            fetchNewsFromAPI()
+        } else {
+            print("#### 네트워크 불가능 ")
+            fetchNewsFromRealm()
+        }
     }
     
-    // News data 를 가져온다.
-    func fetchNews() {
+    // News data 를 API 를 통해 가져온다.
+    func fetchNewsFromAPI() {
+        
         AF.request("\(BaseUrl)\(APIKey)")
             .publishDecodable(type: ItemModel.self)
             .compactMap{ $0.value }
             .sink(receiveCompletion: { completion in
-//                switch completion {
-//                    case .finished:
-//                        print("fetchNews finished")
-//                    case .failure(let error):
-//                        print("Error fetchNews: \(error)")
-//                    }
+                switch completion {
+                    case .finished:
+                        print("fetchNews finished")
+                    case .failure(let error):
+                        // 수신 오류일 경우 저장된 데이터로 보여준다.
+                        self.fetchNewsFromRealm()
+                        print("Error fetchNews: \(error)")
+                    }
             }, receiveValue: { [weak self] receivedValue in
                 guard let self = self else { return }
                 self.status = receivedValue.status ?? ""
                 self.totalCnt = receivedValue.totalCnt ?? 0
                 if let list = receivedValue.items, !list.isEmpty {
-                    self.items = list
-                    self.groupedItems = list.groupBy(by: 5)
+                    handleNewsData(_list: list)
                 }
             }).store(in: &subscription)
+    }
+    
+    // Realm 을 통해 저장된 News data 를 가져온다.
+    func fetchNewsFromRealm() {
+        
+        let savedData = realmManager.read(NewsLocalData.self)
+        
+        if !savedData.isEmpty {
+            setListItems(_list: savedData.map { $0.convertToItemDetail() })
+        }
+    }
+    
+    
+    // API 를 통해 받아온 데이터와, 기존 저장된 데이터를 비교해서 없는 데이터를 저장한다.
+    func handleNewsData(_list: [ItemDetail]) {
+        
+        // 데이터 비교를 위해 Realm 을 통해 저장된 데이터를 불러온다.
+        let savedData = realmManager.read(NewsLocalData.self)
+        
+        // compare Key 가 없어서 제목이 같지 않은 데이터만 저장하도록 적용
+        let newData = _list.filter { newDataItem in
+            !savedData.contains { savedDataItem in
+                return newDataItem.title == savedDataItem.title
+            }
+        }.map{ $0.convertToNewsLocalData() }
+        
+        realmManager.create(newData)
+        // 1. 저장된 데이터 전체를 보여줘야 한다면
+         let combinedList = Set(newData + savedData)
+         setListItems(_list: combinedList.map{ $0.convertToItemDetail() })
+
+        // 2. 새로 받아온 데이터만 보여줘야 한다면.
+//        setListItems(_list: _list)
+    }
+    
+    func setListItems(_list: [ItemDetail]) {
+        
+        let sortedList = _list.sorted(by: { dateUtils.compareISODate(targetString: $0.publishedAt, fromString: $1.publishedAt) })
+        
+        self.items = sortedList
+        self.groupedItems = sortedList.groupBy(by: 5)
     }
     
     /**
