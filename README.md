@@ -2,6 +2,12 @@
 
 ## 🗓️ ** Preview **
 
+** Light Mode **
+https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/c47bd883-d6b6-4a91-bcf7-35de2d35e661
+
+** Dark Mode **
+https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/4abd2b01-f433-4f68-9753-239b1a5f643d
+
 <br>
 
 ## 🗓️ ** 일정 **
