@@ -21,14 +21,15 @@ struct ListHeaderView: View {
                   .imageScale(.medium)
                   .foregroundColor(
                     vm.toggleState == .gallery ?
-                        Colors.splashBg : Colors.emptyImage
+                        Colors.splashIcon : Colors.emptyImage
                   )
                   .frame(
                     width: Dimensions.headerIconWidth,
                     height: Dimensions.headerIconHeight
                   )
                   
-              }.buttonStyle(.bordered)
+              }
+              .buttonStyle(.bordered)
             Button {
                 vm.setToggleState(_state: 1)
               } label: {
@@ -36,7 +37,7 @@ struct ListHeaderView: View {
                   .imageScale(.large)
                   .foregroundColor(
                     vm.toggleState == .list ?
-                        Colors.splashBg : Colors.emptyImage
+                        Colors.splashIcon : Colors.emptyImage
                   )
                   .frame(
                     width: Dimensions.headerIconWidth,
