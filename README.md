@@ -3,11 +3,11 @@
 ## 🗓️ ** Preview **
 
 ### 💡[Light Mode]
-<p align="center">[![Light Mode]](https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/c47bd883-d6b6-4a91-bcf7-35de2d35e661)</p>
+[![Light Mode]](https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/c47bd883-d6b6-4a91-bcf7-35de2d35e661)
 
 
 ### 🪟[Dark Mode]
-<p align="center">[![Dark Mode]](https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/4abd2b01-f433-4f68-9753-239b1a5f643d)</p>
+[![Dark Mode]](https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/4abd2b01-f433-4f68-9753-239b1a5f643d)
 
 ### 💿[Realm Data]
 <p align="center"><img src="https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/1d05fd5c-5b48-480a-98d7-97eb25ce0240" width="600" height="300"></p>
