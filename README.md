@@ -56,10 +56,10 @@ $ https://github.com/jungsu0717/Sample.git
 ## 🔨 사용 기술
 
 -   Language : <img src="https://img.shields.io/badge/Swift-F05138?style=flat&logo=Swift&logoColor=white"/></a>
--   Architecture : <img src="https://img.shields.io/badge/MVVM?style=flat&logo=MVVM&logoColor=white"/></a>
--   Framework : <img src="https://img.shields.io/badge/Combine?style=flat&logo=Combine&logoColor=white"/></a>
--   Tool : <img src="https://img.shields.io/badge/Xcode-147EFB?style=flat&logo=Xcode&logoColor=white"/></a> <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white"/></a> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white"/></a>  src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white"/></a>
--   Package : <img src="https://img.shields.io/badge/Realm-39477F?style=flat&logo=Realm&logoColor=white"/></a> <img src="https://img.shields.io/badge/Alamofire?style=flat&logo=Alamofire&logoColor=white"/></a>
+-   Architecture : <img src="https://img.shields.io/badge/MVVM-8A2BE2?style=flat&logo=MVVM&logoColor=white"/></a>
+-   Framework : <img src="https://img.shields.io/badge/Combine-8A2BE2?style=flat&logo=Combine&logoColor=white"/></a>
+-   Tool : <img src="https://img.shields.io/badge/Xcode-147EFB?style=flat&logo=Xcode&logoColor=white"/></a> <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white"/></a> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=white"/></a>
+-   Package : <img src="https://img.shields.io/badge/Realm-39477F?style=flat&logo=Realm&logoColor=white"/></a> <img src="https://img.shields.io/badge/Alamofire-8A2BE2?style=flat&logo=Alamofire&logoColor=white"/></a>
 
 <br>
 
