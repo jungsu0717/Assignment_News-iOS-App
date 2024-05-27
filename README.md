@@ -9,6 +9,8 @@
 ### 🪟[Dark Mode]
 [![Dark Mode]](https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/4abd2b01-f433-4f68-9753-239b1a5f643d)
 
+### 💿[Realm Data]
+<p align="center"><img src="https://github.com/jungsu0717/Assignment_News-iOS-App/assets/6903839/1d05fd5c-5b48-480a-98d7-97eb25ce0240" width="600" height="300"></p>
 <br>
 
 ## 🗓️ ** 일정 **
@@ -21,6 +23,7 @@
 - Github 에서 코드 설치 다운로드
 
 1. 하단의 Code 버튼을 눌러 경로를 복사한 후 복제
+
 
 ```
 $ https://github.com/jungsu0717/Sample.git
