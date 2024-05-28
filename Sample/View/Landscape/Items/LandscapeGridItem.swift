@@ -32,7 +32,7 @@ struct LandscapeGridItem: View {
                 if let title = itemDetail.title, !title.isEmpty {
                     Text(title)
                         .font(Fonts.titleSmall)
-                        .foregroundColor(Colors.title)
+                        .foregroundColor(itemDetail.isChecked ?? false ? Color.newsTitleRed : Colors.title)
                         .lineLimit(1)
                         .truncationMode(.tail)
                 }

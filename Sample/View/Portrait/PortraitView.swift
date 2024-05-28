@@ -25,8 +25,9 @@ struct PortraitView: View {
                         case .list:
                             PortraitListItem(item)
                     }
-                    NavigationLink(destination: DetailWebView(item)) {
-                    }.opacity(0)
+                    NavigationLink(destination: DetailWebView(vm: vm, item)) {
+                    }
+                    .opacity(0)
                 }
             }
             .hideListRowSeparator()

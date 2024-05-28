@@ -10,6 +10,7 @@ import RealmSwift
 
 class NewsLocalData: Object, Codable {
     @Persisted(primaryKey: true) var _id: ObjectId   // primary key로 지정
+//    @Persisted(primaryKey: true) var id: String   // primary key로 지정
     @Persisted var title: String
     @Persisted var content: String
     @Persisted var url: String
@@ -20,6 +21,7 @@ class NewsLocalData: Object, Codable {
 
     convenience init(title: String, content: String? = nil, url: String, urlToImage: String, publishedAt: String, isChecked: Bool = false) {
          self.init()
+//        self.id = id
          self.title = title
          if let content = content, !content.isEmpty {
              self.content = content
@@ -33,6 +35,7 @@ class NewsLocalData: Object, Codable {
     // Local Data 를 NewsData 로 변환
     func convertToItemDetail() -> ItemDetail {
         return ItemDetail(
+//            id: self.id,
             source: Source.getDummy(),
             author: nil,
             title: self.title,

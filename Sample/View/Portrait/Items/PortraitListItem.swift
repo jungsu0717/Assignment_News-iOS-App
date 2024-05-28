@@ -33,7 +33,7 @@ struct PortraitListItem: View {
                 if let title = itemDetail.title {
                     Text(title)
                         .font(Fonts.titleLarge)
-                        .foregroundColor(Colors.title)
+                        .foregroundColor(itemDetail.isChecked ?? false ? Color.newsTitleRed : Colors.title)
                         .lineLimit(1)
                         .truncationMode(.tail)
                 }

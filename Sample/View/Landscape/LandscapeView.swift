@@ -18,7 +18,7 @@ struct LandscapeView: View {
                 HStack(spacing: Dimensions.largePadding) {
                     ForEach(vm.groupedItems[index]) { item in
                         ZStack {
-                            NavigationLink(destination: DetailWebView(item)) {
+                            NavigationLink(destination: DetailWebView(vm: vm, item)) {
                                     LandscapeGridItem(item)
                             }.buttonStyle(PlainButtonStyle())
                         }

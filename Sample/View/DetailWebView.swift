@@ -9,29 +9,22 @@ import SwiftUI
 
 struct DetailWebView: View {
     
+    var vm : ItemViewModel
     var itemDetail: ItemDetail
     
-    init(_ itemDetail : ItemDetail) {
-        
+    init(vm: ItemViewModel, _ itemDetail : ItemDetail) {
+        self.vm = vm
         self.itemDetail = itemDetail
-        
-        let realmManager = RealmManager.instance
-        let savedData = realmManager.read(NewsLocalData.self)
-        
-        let localData = savedData.first { data in data.title == itemDetail.title }
-        
-        self.itemDetail.isChecked = true
-        if let data = localData {
-            realmManager.update(data) { item in
-                item.isChecked = true
-            }
-        }
     }
     
     var body: some View {
         VStack {
             WebView(url: "\(itemDetail.url ?? "")")
             //                .edgesIgnoringSafeArea(.all)
+                .onAppear{
+                    
+                    self.vm.markItemAsChecked(self.itemDetail)
+                }
         }
         .navigationBarTitle(itemDetail.title ?? Strings.navigationDetailTitle, displayMode: .inline)
         
@@ -39,5 +32,5 @@ struct DetailWebView: View {
 }
 
 #Preview {
-    DetailWebView(ItemDetail.getDummy())
+    DetailWebView(vm: ItemViewModel(), ItemDetail.getDummy())
 }

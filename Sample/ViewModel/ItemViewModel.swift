@@ -100,17 +100,47 @@ class ItemViewModel: ObservableObject {
          setListItems(_list: combinedList.map{ $0.convertToItemDetail() })
 
         // 2. 새로 받아온 데이터만 보여줘야 한다면.
-//        setListItems(_list: _list)
+        // setListItems(_list: _list)
     }
     
+    // List 를 정렬해서 설정
     func setListItems(_list: [ItemDetail]) {
         
         let sortedList = _list.sorted(by: { dateUtils.compareISODate(targetString: $0.publishedAt, fromString: $1.publishedAt) })
         
         self.items = sortedList
-        self.groupedItems = sortedList.groupBy(by: 5)
+        self.groupedItems = self.items.groupBy(by: 5)
     }
     
+//    // Item 상세페이지 이동 시 isChecked 여부를 UI, DB 에 업데이트
+//    func asd(_ itemDetail: ItemDetail) {
+//        
+//        let savedData = realmManager.read(NewsLocalData.self)
+//        
+//        let localData = savedData.first { data in data.title == itemDetail.title }
+//        
+//        itemDetail.isChecked = true
+//        
+//        if let data = localData {
+//            realmManager.update(data) { item in
+//                item.isChecked = true
+//            }
+//        }
+//    }
+    
+    // Item 상세페이지 이동 시 isChecked 여부를 UI, DB 에 업데이트
+    func markItemAsChecked(_ item: ItemDetail) {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            
+            let savedData = realmManager.read(NewsLocalData.self)
+            
+            items[index].isChecked = true
+//            realmManager.update(item) { data in
+//                data.isChecked = true
+//            }
+//            realmManager.update(item, with: ["isChecked": true])
+        }
+    }
     /**
      * Portrait List UI 상태 설정
      * 0: gallery, 1: list
