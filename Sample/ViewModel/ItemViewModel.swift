@@ -17,7 +17,6 @@ class ItemViewModel: ObservableObject {
     @Published var status = ""
     @Published var totalCnt = 0
     @Published var items = [ItemDetail]()
-    @Published var groupedItems = [[ItemDetail]()]
     
     @Published var toggleState = ToggleState.gallery
     @Published var orientation = UIDevice.current.orientation
@@ -37,10 +36,8 @@ class ItemViewModel: ObservableObject {
     init() {
         // 네트워크 가능할 때
         if NetworkReachabilityManager()?.isReachable ?? false {
-            print("#### 네트워크 가능 ")
             fetchNewsFromAPI()
         } else {
-            print("#### 네트워크 불가능 ")
             fetchNewsFromRealm()
         }
     }
@@ -103,13 +100,14 @@ class ItemViewModel: ObservableObject {
         // setListItems(_list: _list)
     }
     
-    // List 를 정렬해서 설정
+    // List 를 최신날짜 순으로 정렬
     func setListItems(_list: [ItemDetail]) {
-        
-        let sortedList = _list.sorted(by: { dateUtils.compareISODate(targetString: $0.publishedAt, fromString: $1.publishedAt) })
-        
-        self.items = sortedList
-        self.groupedItems = self.items.groupBy(by: 5)
+        self.items = _list.sorted(by: { dateUtils.compareISODate(targetString: $0.publishedAt, fromString: $1.publishedAt) })
+    }
+    
+    // Landscape 에서 grid 를 나타내기 위해 그룹화된 데이터를 반환한다.
+    func getGroupedItems() -> [[ItemDetail]] {
+        return self.items.groupBy(by: 5)
     }
     
 //    // Item 상세페이지 이동 시 isChecked 여부를 UI, DB 에 업데이트
@@ -132,9 +130,15 @@ class ItemViewModel: ObservableObject {
     func markItemAsChecked(_ item: ItemDetail) {
         if let index = items.firstIndex(where: { $0.id == item.id }) {
             
-            let savedData = realmManager.read(NewsLocalData.self)
+            if let savedData = realmManager.read(NewsLocalData.self).filter("id == %@", item.id.uuidString).first {
+                
+                realmManager.update(item.convertToNewsLocalData()) { data in
+                    savedData.isChecked = true
+                }
+            }
             
             items[index].isChecked = true
+            
 //            realmManager.update(item) { data in
 //                data.isChecked = true
 //            }

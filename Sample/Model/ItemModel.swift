@@ -68,6 +68,7 @@ struct ItemDetail: Codable, Identifiable {
     // NewsData 를 Local Data 로 변환
     func convertToNewsLocalData() -> NewsLocalData {
         return NewsLocalData(
+            id: self.id.uuidString,
             title: self.title ?? "",
             content: self.description ?? "",
             url: self.url ?? "",

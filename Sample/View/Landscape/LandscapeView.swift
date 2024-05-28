@@ -12,11 +12,11 @@ struct LandscapeView: View {
     @ObservedObject var vm: ItemViewModel
     
     var body: some View {
-        List(vm.groupedItems.indices, id: \.self) { index in
+        List(vm.getGroupedItems().indices, id: \.self) { index in
             
             ScrollView(.horizontal,showsIndicators: false) {
                 HStack(spacing: Dimensions.largePadding) {
-                    ForEach(vm.groupedItems[index]) { item in
+                    ForEach(vm.getGroupedItems()[index]) { item in
                         ZStack {
                             NavigationLink(destination: DetailWebView(vm: vm, item)) {
                                     LandscapeGridItem(item)
