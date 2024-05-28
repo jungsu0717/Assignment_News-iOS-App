@@ -9,9 +9,11 @@ import SwiftUI
 
 struct DetailWebView: View {
     
+    var vm : ItemViewModel
     var itemDetail: ItemDetail
     
-    init(_ itemDetail : ItemDetail) {
+    init(vm: ItemViewModel, _ itemDetail : ItemDetail) {
+        self.vm = vm
         self.itemDetail = itemDetail
     }
     
@@ -19,6 +21,10 @@ struct DetailWebView: View {
         VStack {
             WebView(url: "\(itemDetail.url ?? "")")
             //                .edgesIgnoringSafeArea(.all)
+                .onAppear{
+                    
+                    self.vm.markItemAsChecked(self.itemDetail)
+                }
         }
         .navigationBarTitle(itemDetail.title ?? Strings.navigationDetailTitle, displayMode: .inline)
         
@@ -26,5 +32,5 @@ struct DetailWebView: View {
 }
 
 #Preview {
-    DetailWebView(ItemDetail.getDummy())
+    DetailWebView(vm: ItemViewModel(), ItemDetail.getDummy())
 }

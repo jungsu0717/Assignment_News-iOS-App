@@ -36,9 +36,10 @@ struct ItemDetail: Codable, Identifiable {
     let urlToImage: String?
     let publishedAt: String?
     let content: String?
+    var isChecked: Bool?
     
     private enum CodingKeys: String, CodingKey {
-        case source, author, title, description, url, urlToImage, publishedAt, content
+        case source, author, title, description, url, urlToImage, publishedAt, content, isChecked
     }
     
     var getImageUrl: URL? {
@@ -62,6 +63,19 @@ struct ItemDetail: Codable, Identifiable {
     
     static func getDummy() -> Self {
         return Dummys.itemDetailDummy
+    }
+    
+    // NewsData 를 Local Data 로 변환
+    func convertToNewsLocalData() -> NewsLocalData {
+        return NewsLocalData(
+            id: self.id.uuidString,
+            title: self.title ?? "",
+            content: self.description ?? "",
+            url: self.url ?? "",
+            urlToImage: self.urlToImage ?? "",
+            publishedAt: self.publishedAt ?? "",
+            isChecked: self.isChecked ?? false
+        )
     }
 }
 

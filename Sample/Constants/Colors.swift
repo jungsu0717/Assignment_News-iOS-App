@@ -11,6 +11,7 @@ import SwiftUI
 
 struct Colors {
     static let title = Color("NewsTitle")
+    static let titleRed = Color("NewsTitleRed")
     static let content = Color("NewsContent")
     static let background = Color("NewsBg")
     

@@ -23,5 +23,4 @@ extension String {
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         return dateFormatter.date(from: self)
     }
-    
 }
