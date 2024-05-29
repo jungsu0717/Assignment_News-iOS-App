@@ -15,6 +15,7 @@ struct Dimensions {
     static let smallPadding: CGFloat = 4.0
     static let mediumPadding: CGFloat = 8.0
     static let largePadding: CGFloat = 12.0
+    static let skeltonPadding: CGFloat = 16
     
     // width
     static let clockSmallWidth: CGFloat = 8
@@ -29,10 +30,23 @@ struct Dimensions {
     static let listCardImagePixelHeight: CGFloat = 120.0
     static let headerIconHeight: CGFloat = 20.0
     
+    // skeleton frame
+    
+    static let skeltonImgHeight: CGFloat = 150
+    static let skeltonTitleHeight: CGFloat = 30
+    static let skeltonContentHeight: CGFloat = 20
+    
+    static let skeltonHeaderTitleWidth: CGFloat = 100
+    static let skeltonHeaderTitleHeight: CGFloat = 30
+    
+    static let skeltonHeaderToggleWidth: CGFloat = 40
+    static let skeltonHeaderToggleHeight: CGFloat = 30
+    
     // shadow
     static let shadowSmall: CGFloat = 2.0
     
     // cornerRadius
     static let cornerRadiusSmall: CGFloat = 4.0
+    static let cornerRadiusMedium: CGFloat = 10.0
     static let cornerRadiusLarge: CGFloat = 20.0
 }

@@ -25,4 +25,9 @@ extension View {
     func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
         self.modifier(DeviceRotationViewModifier(action: action))
     }
+    
+    // Skeleton View 
+    func shimmering() -> some View {
+        self.modifier(ShimmeringViewModifier())
+    }
 }

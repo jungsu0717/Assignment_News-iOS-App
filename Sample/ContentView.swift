@@ -32,7 +32,12 @@ struct ContentView: View {
                     vm.setOrientation(_orientation: newOrientation)
                 }
             } else {
-                ProgressView()
+                SkeletonHeaderView().padding(.horizontal, Dimensions.skeltonPadding)
+                List {
+                    ForEach(0..<8) { _ in
+                        SkeletonContentsView()
+                    }
+                }
             }
         }
     }

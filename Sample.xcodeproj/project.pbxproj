@@ -17,6 +17,9 @@
 		B930E3FD2C00858400AFB33B /* PortraitGalleryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930E3FC2C00858400AFB33B /* PortraitGalleryItem.swift */; };
 		B930E3FF2C0098E800AFB33B /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930E3FE2C0098E800AFB33B /* ItemViewModel.swift */; };
 		B930E4012C00990300AFB33B /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930E4002C00990300AFB33B /* ItemModel.swift */; };
+		B989A4C92C06D4E9004FA155 /* SkeletonContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B989A4C82C06D4E9004FA155 /* SkeletonContentsView.swift */; };
+		B989A4CB2C06E268004FA155 /* ShimmeringViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B989A4CA2C06E268004FA155 /* ShimmeringViewModifier.swift */; };
+		B989A4CD2C06E2B5004FA155 /* SkeletonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B989A4CC2C06E2B5004FA155 /* SkeletonHeaderView.swift */; };
 		B9EE44952C010BEA002B74EC /* DetailWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EE44942C010BEA002B74EC /* DetailWebView.swift */; };
 		B9EE44972C010E7B002B74EC /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EE44962C010E7B002B74EC /* WebView.swift */; };
 		B9EE44A02C0188AE002B74EC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B9EE449F2C0188AE002B74EC /* Alamofire */; };
@@ -97,6 +100,9 @@
 		B930E3FC2C00858400AFB33B /* PortraitGalleryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitGalleryItem.swift; sourceTree = "<group>"; };
 		B930E3FE2C0098E800AFB33B /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		B930E4002C00990300AFB33B /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		B989A4C82C06D4E9004FA155 /* SkeletonContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonContentsView.swift; sourceTree = "<group>"; };
+		B989A4CA2C06E268004FA155 /* ShimmeringViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmeringViewModifier.swift; sourceTree = "<group>"; };
+		B989A4CC2C06E2B5004FA155 /* SkeletonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonHeaderView.swift; sourceTree = "<group>"; };
 		B9EE44942C010BEA002B74EC /* DetailWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWebView.swift; sourceTree = "<group>"; };
 		B9EE44962C010E7B002B74EC /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		B9EE44AC2C01A52C002B74EC /* NewsLocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsLocalData.swift; sourceTree = "<group>"; };
@@ -233,6 +239,8 @@
 				B9EE44B92C01CD07002B74EC /* ListHeaderView.swift */,
 				B9EE44BD2C01D6F8002B74EC /* ImageView.swift */,
 				B9EE44C62C022546002B74EC /* EmptyImage.swift */,
+				B989A4C82C06D4E9004FA155 /* SkeletonContentsView.swift */,
+				B989A4CC2C06E2B5004FA155 /* SkeletonHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,6 +307,7 @@
 				B9EE44C82C0248F0002B74EC /* DeviceRotationViewModifier.swift */,
 				B9EE44962C010E7B002B74EC /* WebView.swift */,
 				B9FADF6F2C05073A005FC537 /* DateUtils.swift */,
+				B989A4CA2C06E268004FA155 /* ShimmeringViewModifier.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -496,6 +505,7 @@
 				B9EE44CD2C024A0C002B74EC /* LandscapeView.swift in Sources */,
 				B9EE44B82C01CB6E002B74EC /* View.swift in Sources */,
 				B9EE44E22C045439002B74EC /* String.swift in Sources */,
+				B989A4C92C06D4E9004FA155 /* SkeletonContentsView.swift in Sources */,
 				B930E4012C00990300AFB33B /* ItemModel.swift in Sources */,
 				B9EE44EB2C047110002B74EC /* Colors.swift in Sources */,
 				B9EE44952C010BEA002B74EC /* DetailWebView.swift in Sources */,
@@ -506,6 +516,7 @@
 				B9EE44BA2C01CD07002B74EC /* ListHeaderView.swift in Sources */,
 				B9FADF702C05073A005FC537 /* DateUtils.swift in Sources */,
 				B9EE44ED2C047156002B74EC /* SFSymbols.swift in Sources */,
+				B989A4CB2C06E268004FA155 /* ShimmeringViewModifier.swift in Sources */,
 				B9EE44D32C025707002B74EC /* Array.swift in Sources */,
 				B9EE44CB2C0249DB002B74EC /* PortraitView.swift in Sources */,
 				B9EE44DE2C044886002B74EC /* Date.swift in Sources */,
@@ -513,6 +524,7 @@
 				B9EE44D52C025DDF002B74EC /* LandscapeGridItem.swift in Sources */,
 				B9EE44E92C0470EB002B74EC /* Fonts.swift in Sources */,
 				B9EE44D72C026AC6002B74EC /* CGFloat.swift in Sources */,
+				B989A4CD2C06E2B5004FA155 /* SkeletonHeaderView.swift in Sources */,
 				B9EE44C32C01EDB0002B74EC /* ImageUtil.swift in Sources */,
 				B930E3FF2C0098E800AFB33B /* ItemViewModel.swift in Sources */,
 				B9EE44972C010E7B002B74EC /* WebView.swift in Sources */,
