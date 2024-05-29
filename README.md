@@ -30,6 +30,8 @@ $ https://github.com/jungsu0717/Sample.git
 ```
 2. Sample.xcodeproj 실행
 3. Target Device 선택 > Run
+4. 신뢰하지 않는 개발자 팝업 시 해결
+    - 설정 > 일반 > VPN 및 기기 관리 > 개발자 앱 신뢰
 - ** 💡실행이 안되거나 버그를 발견할 경우 issue 에 등록 부탁드립니다.💡 **
 
 <br>
