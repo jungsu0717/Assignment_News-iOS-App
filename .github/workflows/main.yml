@@ -21,7 +21,8 @@ jobs:
         mklink libglapi.dll "x64\libglapi.dll"
 
     - name: Check Current Directory
-      run: echo %CD%
+      run: cd
+      shell: cmd
       
     - name: Check Symbolic Link
       run: |
