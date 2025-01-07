@@ -14,23 +14,20 @@ jobs:
 
     # 2. Mesa3D 설치 (OpenGL 소프트웨어 렌더링)
     - name: Install Mesa
+      shell: cmd
       run: |
         curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
-        7z x mesa.7z
-        set PATH=%CD%\mesa\x64;%PATH%
-      shell: cmd
+        "C:\Program Files\7-Zip\7z.exe" x mesa.7z
+        set PATH=%CD%\x64;%PATH%
       
-    - name: Set Gallium Driver
-      run: set GALLIUM_DRIVER=swr
-      shell: cmd
-      
-    # # 3. Kivy GL Backend 설정 (환경 변수)
-    # - name: Set Kivy GL Backend
-    #   run: |
-    #     echo "Setting Kivy GL Backend to angle_sdl2"
-    #   env:
-    #     KIVY_GL_BACKEND: angle_sdl2
+    - name: Set Kivy GL Backend
+      run: set KIVY_GL_BACKEND=angle_sdl2
 
+    - name: Verify Mesa DLL Files
+      shell: cmd
+      run: |
+        dir %CD%\x64
+        
     # # 4. Python 환경 설정
     # - name: Setup Python
     #   uses: actions/setup-python@v5.3.0
