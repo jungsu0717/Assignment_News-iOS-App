@@ -18,11 +18,11 @@ jobs:
       run: |
         curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
         "C:\Program Files\7-Zip\7z.exe" x mesa.7z
-        setx PATH "%CD%\x64;%PATH%"
+        set PATH=%CD%\x64;%PATH%
 
     # 3. Kivy GL Backend 설정
     - name: Set Kivy GL Backend
-      run: setx KIVY_GL_BACKEND angle_sdl2
+      run: set KIVY_GL_BACKEND=angle_sdl2
 
     # 4. Python 환경 설정
     - name: Setup Python
