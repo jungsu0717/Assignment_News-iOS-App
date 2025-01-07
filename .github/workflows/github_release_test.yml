@@ -1,6 +1,10 @@
 name: openGL Test
 
 on:
+  # main branch PR 시 실행
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -20,4 +24,28 @@ jobs:
         echo "This is file 2" > myfolder/file2.txt
         "C:\Program Files\7-Zip\7z.exe" a folderarchive.zip myfolder\*
 
-        
+    # 7. Github release 생성
+    - name: Create Github release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.sha }}  # Git commit SHA를 태그 이름으로 사용
+        release_name: uivat_v${{ github.sha }}  # Git commit SHA로 release name 생성
+        body: |
+          New release triggered by push event.
+        draft: false
+        prerelease: false
+    
+    # 8. 빌드 결과 업로드
+    - name: Upload release assets
+      id: upload-release-assets
+      uses: actions/upload-release-asset@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./folderarchive.zip               # zip 파일 경로
+        asset_name: folderarchive.zip                 # zip 파일 이름
+        asset_content_type: application/zip
