@@ -25,13 +25,13 @@ jobs:
       run: |
         set PATH=%CD%\x64;%PATH%
         echo %PATH%
+        mklink /D C:\Windows\System32\opengl32.dll x64\opengl32.dll
+        mklink /D C:\Windows\System32\libglapi.dll x64\libglapi.dll
+        dir C:\Windows\System32\
         
     # 3. Kivy GL Backend 설정
     - name: Set Kivy GL Backend
       run: set KIVY_GL_BACKEND=angle_sdl2
-
-    - name: 111
-      run: python -c "import platform; print(platform.architecture())"
 
     # 4. Python 환경 설정
     - name: Setup Python
