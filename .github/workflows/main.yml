@@ -28,7 +28,11 @@ jobs:
     - name: Check Current Directory2
       run: dir
       shell: cmd
-      
+
+    - name: Check Windows architecture
+      run: |
+        wmic os get architecture
+        
     - name: Check Symbolic Link
       run: |
         dir C:\Windows\System32\opengl32.dll
