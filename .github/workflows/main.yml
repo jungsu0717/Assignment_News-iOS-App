@@ -47,9 +47,16 @@ jobs:
         
     # 5. pyopengl과 pygame 설치
     - name: Find Path
+      shell: cmd
       run: |
         where opengl32.dll
         where libglapi.dll
+
+    - name: Find OpenGL DLLs in Specific Directory
+      shell: cmd
+      run: |
+        dir x64\opengl32.dll
+        dir x64\libglapi.dll
         
     # 5. pyopengl과 pygame 설치
     - name: Install pyopengl and pygame
