@@ -19,8 +19,10 @@ jobs:
         "C:\Program Files\7-Zip\7z.exe" x mesa.7z
         mklink opengl32.dll "x64\opengl32.dll"
         mklink libglapi.dll "x64\libglapi.dll"
-      working-directory: ./
 
+    - name: Check Current Directory
+      run: echo %CD%
+      
     - name: Check Symbolic Link
       run: |
         dir C:\Windows\System32\opengl32.dll
