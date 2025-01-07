@@ -35,7 +35,7 @@ jobs:
     #     python-version: 3.12.4  # 3.12.4 Python 버전 필수
 
     - name: Setup OpenGL
-      uses: actions/setup-opengl@v1
+      uses: openrndr/setup-opengl@v1.1
         
     # 5. pyopengl과 pygame 설치
     - name: Install pyopengl and pygame
