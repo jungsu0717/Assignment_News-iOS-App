@@ -30,7 +30,7 @@ jobs:
 
     - name: Check Dir
       run: |
-        dir C:\Windows\System32\
+        dir x64
       shell: cmd
 
     # 3. Kivy GL Backend 설정
