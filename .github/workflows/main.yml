@@ -12,28 +12,31 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4.2.2
 
-    # 2. Mesa3D 설치 (OpenGL 소프트웨어 렌더링)
-    - name: Install Mesa
-      run: |
-        curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
-        "C:\Program Files\7-Zip\7z.exe" x mesa.7z
-        mklink /D C:\Windows\System32\opengl32.dll "x64\opengl32.dll"
-        mklink /D C:\Windows\System32\libglapi.dll "x64\libglapi.dll"
-      shell: cmd
+    # # 2. Mesa3D 설치 (OpenGL 소프트웨어 렌더링)
+    # - name: Install Mesa
+    #   run: |
+    #     curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
+    #     "C:\Program Files\7-Zip\7z.exe" x mesa.7z
+    #     mklink /D C:\Windows\System32\opengl32.dll "x64\opengl32.dll"
+    #     mklink /D C:\Windows\System32\libglapi.dll "x64\libglapi.dll"
+    #   shell: cmd
 
-    # 3. Kivy GL Backend 설정 (환경 변수)
-    - name: Set Kivy GL Backend
-      run: |
-        echo "Setting Kivy GL Backend to angle_sdl2"
-      env:
-        KIVY_GL_BACKEND: angle_sdl2
+    # # 3. Kivy GL Backend 설정 (환경 변수)
+    # - name: Set Kivy GL Backend
+    #   run: |
+    #     echo "Setting Kivy GL Backend to angle_sdl2"
+    #   env:
+    #     KIVY_GL_BACKEND: angle_sdl2
 
-    # 4. Python 환경 설정
-    - name: Setup Python
-      uses: actions/setup-python@v5.3.0
-      with:
-        python-version: 3.12.4  # 3.12.4 Python 버전 필수
+    # # 4. Python 환경 설정
+    # - name: Setup Python
+    #   uses: actions/setup-python@v5.3.0
+    #   with:
+    #     python-version: 3.12.4  # 3.12.4 Python 버전 필수
 
+    - name: Setup OpenGL
+      uses: marketplace/actions/setup-opengl@v1
+        
     # 5. pyopengl과 pygame 설치
     - name: Install pyopengl and pygame
       run: |
