@@ -48,4 +48,4 @@ jobs:
     - name: Check OpenGL Version with Pygame
       run: |
         set SDL_GL_LOG=1
-        python -c "import pygame; pygame.init(); print("Loaded opengl32.dll:", ctypes.util.find_library('opengl32')); display = pygame.display.set_mode((1, 1), pygame.OPENGL); from OpenGL.GL import glGetString, GL_VERSION; print('OpenGL Version:', glGetString(GL_VERSION).decode())"
+        python -c "import pygame; pygame.init(); display = pygame.display.set_mode((1, 1), pygame.OPENGL); from OpenGL.GL import glGetString, GL_VERSION; print('OpenGL Version:', glGetString(GL_VERSION).decode())"
