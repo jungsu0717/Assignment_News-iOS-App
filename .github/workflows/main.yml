@@ -30,6 +30,9 @@ jobs:
     - name: Set Kivy GL Backend
       run: set KIVY_GL_BACKEND=angle_sdl2
 
+    - name: 111
+      run: python -c "import platform; print(platform.architecture())"
+
     # 4. Python 환경 설정
     - name: Setup Python
       uses: actions/setup-python@v5.3.0
