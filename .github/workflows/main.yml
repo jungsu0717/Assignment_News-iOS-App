@@ -36,12 +36,12 @@ jobs:
         pip install pyopengl pygame
 
     # 6. OpenGL 버전 확인
-    - name: Check OpenGL Version with Pygame
+    - name: Check OpenGL Version with Pygame and Mesa
       run: |
         python -c "
         import os
         import pygame
-        os.environ['PATH'] = f'{os.getcwd()}\\x64;{os.environ[\"PATH\"]}'
+        os.environ['PATH'] = os.getcwd() + '\\x64;' + os.environ['PATH']
         pygame.init()
         display = pygame.display.set_mode((1, 1), pygame.OPENGL)
         from OpenGL.GL import glGetString, GL_VERSION
