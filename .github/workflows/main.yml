@@ -60,12 +60,13 @@ jobs:
       run: |
         dir x64\opengl32.dll
         dir x64\libglapi.dll
+        dir C:\Windows\System32\
 
     
     - name: Set PATH
       shell: cmd
       run: |
-        setx PATH=%CD%\x64;%PATH%
+        echo PATH=%CD%\x64;%PATH% >> %GITHUB_ENV%
         echo %CD%\x64
       
     - name: Verify PATH
