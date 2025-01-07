@@ -1,0 +1,23 @@
+name: openGL Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-upload:
+    runs-on: windows-latest
+
+    steps:
+    # 1. 저장소 코드 체크아웃
+    - name: Checkout
+      uses: actions/checkout@v4.2.2
+
+    - name: Create a folder and compress it into a ZIP
+      shell: cmd
+      run: |
+        mkdir myfolder
+        echo "This is file 1" > myfolder/file1.txt
+        echo "This is file 2" > myfolder/file2.txt
+        "C:\Program Files\7-Zip\7z.exe" a folderarchive.zip myfolder\*
+
+        
