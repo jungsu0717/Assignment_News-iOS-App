@@ -65,7 +65,7 @@ jobs:
     - name: Set PATH
       shell: cmd
       run: |
-        set PATH=%CD%\x64;%PATH%
+        setx PATH=%CD%\x64;%PATH%
         echo %CD%\x64
       
     - name: Verify PATH
