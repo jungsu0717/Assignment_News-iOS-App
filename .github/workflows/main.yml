@@ -18,32 +18,32 @@ jobs:
       run: |
         curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
         "C:\Program Files\7-Zip\7z.exe" x mesa.7z
-        set PATH=%CD%\x64;%PATH%
-      
+        setx PATH "%CD%\x64;%PATH%"
+
+    # 3. Kivy GL Backend 설정
     - name: Set Kivy GL Backend
-      run: set KIVY_GL_BACKEND=angle_sdl2
+      run: setx KIVY_GL_BACKEND angle_sdl2
 
-    - name: Verify Mesa DLL Files
-      shell: cmd
-      run: |
-        dir %CD%\x64
-
-    - name: Verify Loaded DLL
-      run: |
-        python -c "import os, ctypes.util; print(f'Loaded OpenGL DLL: {ctypes.util.find_library(\"opengl32\")}')"
-    
-    # # 4. Python 환경 설정
-    # - name: Setup Python
-    #   uses: actions/setup-python@v5.3.0
-    #   with:
-    #     python-version: 3.12.4  # 3.12.4 Python 버전 필수
+    # 4. Python 환경 설정
+    - name: Setup Python
+      uses: actions/setup-python@v5.3.0
+      with:
+        python-version: 3.12.4
 
     # 5. pyopengl과 pygame 설치
     - name: Install pyopengl and pygame
       run: |
-        pip install pyopengl pygame  # pyopengl과 pygame 설치
+        pip install pyopengl pygame
 
-    # 6. OpenGL 버전 확인 (Python으로)
+    # 6. OpenGL 버전 확인
     - name: Check OpenGL Version with Pygame
       run: |
-        python -c "import pygame; pygame.init(); display = pygame.display.set_mode((1, 1), pygame.OPENGL); from OpenGL.GL import glGetString, GL_VERSION; print('OpenGL Version:', glGetString(GL_VERSION).decode())"
+        python -c "
+        import os
+        import pygame
+        os.environ['PATH'] = f'{os.getcwd()}\\x64;{os.environ[\"PATH\"]}'
+        pygame.init()
+        display = pygame.display.set_mode((1, 1), pygame.OPENGL)
+        from OpenGL.GL import glGetString, GL_VERSION
+        print('OpenGL Version:', glGetString(GL_VERSION).decode())
+        "
