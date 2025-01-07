@@ -64,8 +64,11 @@ jobs:
     
     - name: Set PATH
       shell: cmd
-      run: set PATH=%CD%\x64;%PATH%
-
+      run: |
+        set PATH=%CD%\x64;%PATH%
+        echo %CD%\x64
+        dumpbin /DEPENDENTS x64\opengl32.dll
+      
     - name: Verify PATH
       shell: cmd
       run: echo %PATH%
