@@ -21,6 +21,7 @@ jobs:
         mklink libglapi.dll "x64\libglapi.dll"
 
     - name: Set Path
+      shell: cmd
       run: |
         set PATH=%CD%\x64;%PATH%
         echo %PATH%
