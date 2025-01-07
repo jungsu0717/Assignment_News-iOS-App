@@ -23,6 +23,11 @@ jobs:
     - name: Check Current Directory
       run: cd
       shell: cmd
+
+      
+    - name: Check Current Directory2
+      run: dir
+      shell: cmd
       
     - name: Check Symbolic Link
       run: |
