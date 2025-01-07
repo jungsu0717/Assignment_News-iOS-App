@@ -2,6 +2,10 @@ name: openGL Test
 
 on:
   # main branch PR 시 실행
+  # pull_request:
+  #     branches:
+  #       - main
+    
   push:
     branches:
       - main
@@ -10,6 +14,10 @@ on:
 jobs:
   build-and-upload:
     runs-on: windows-latest
+    permissions:
+      packages: write
+      contents: write
+      id-token: write 
 
     steps:
     # 1. 저장소 코드 체크아웃
@@ -24,19 +32,28 @@ jobs:
         echo "This is file 2" > myfolder/file2.txt
         "C:\Program Files\7-Zip\7z.exe" a folderarchive.zip myfolder\*
 
+    # 2. Bump version and push the tag
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        tag_prefix: "v" # 태그 접두사 (v1.0.0 형태)
+        versioning-strategy: auto  # 자동으로 버전 증가
+        commit-message: "${{ github.event.head_commit.message }}"  # 커밋 메시지를 사용하여 버전 증가
+          
     # 7. Github release 생성
-    - name: Create Github release
+    - name: Create GitHub release
       id: create_release
       uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.sha }}  # Git commit SHA를 태그 이름으로 사용
-        release_name: uivat_v${{ github.sha }}  # Git commit SHA로 release name 생성
-        body: |
-          New release triggered by push event.
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+        body: 'Release notes'
         draft: false
         prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     # 8. 빌드 결과 업로드
     - name: Upload release assets
