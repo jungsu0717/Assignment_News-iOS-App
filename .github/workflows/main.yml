@@ -19,7 +19,11 @@ jobs:
         7z x mesa.7z
         set PATH=%CD%\mesa\x64;%PATH%
       shell: cmd
-
+      
+    - name: Set Gallium Driver
+      run: set GALLIUM_DRIVER=swr
+      shell: cmd
+      
     # # 3. Kivy GL Backend 설정 (환경 변수)
     # - name: Set Kivy GL Backend
     #   run: |
