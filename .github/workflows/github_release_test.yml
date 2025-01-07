@@ -27,7 +27,7 @@ jobs:
     # 7. Github release 생성
     - name: Create Github release
       id: create_release
-      uses: actions/create-release@v1.0.0
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
