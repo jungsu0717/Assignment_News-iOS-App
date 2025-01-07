@@ -49,12 +49,6 @@ jobs:
     #     python-version: 3.12.4
 
     # 5. pyopengl과 pygame 설치
-    - name: check dir
-      shell: cmd
-      run: |
-        dir C:\Windows\System32\
-        
-    # 5. pyopengl과 pygame 설치
     - name: Find Path
       shell: cmd
       run: |
@@ -66,7 +60,16 @@ jobs:
       run: |
         dir x64\opengl32.dll
         dir x64\libglapi.dll
-        
+
+    
+    - name: Set PATH
+      shell: cmd
+      run: set PATH=%CD%\x64;%PATH%
+
+    - name: Verify PATH
+      shell: cmd
+      run: echo %PATH%
+      
     # 5. pyopengl과 pygame 설치
     - name: Install pyopengl and pygame
       run: |
