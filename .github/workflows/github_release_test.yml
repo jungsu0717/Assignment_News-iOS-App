@@ -40,6 +40,7 @@ jobs:
       shell: bash
       run: |
         ls -lh uivat.zip
+        unzip -l uivat.zip
     
     # 2. Bump version and push the tag
     - name: Bump version and push tag
