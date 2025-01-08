@@ -30,8 +30,12 @@ jobs:
         mkdir myfolder
         echo "This is file 1" > myfolder/file1.txt
         echo "This is file 2" > myfolder/file2.txt
-        "C:\Program Files\7-Zip\7z.exe" a folderarchive.zip myfolder\*
 
+    - name: Compress files into a ZIP
+      shell: powershell
+      run: |
+        Compress-Archive -Path myfolder\* -DestinationPath uivat.zip
+    
     # 2. Bump version and push the tag
     - name: Bump version and push tag
       id: tag_version
@@ -63,6 +67,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./folderarchive.zip               # zip 파일 경로
-        asset_name: folderarchive.zip                 # zip 파일 이름
+        asset_path: ./uivat.zip               # zip 파일 경로
+        asset_name: uivat.zip                 # zip 파일 이름
         asset_content_type: application/zip
