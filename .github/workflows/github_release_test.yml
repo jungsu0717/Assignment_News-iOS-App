@@ -82,14 +82,14 @@ jobs:
         body: |
           ## What's Changed
           ${{ steps.tag_version.outputs.changelog }}
-        repo: jungsu0717/dist-repository
+        repo: jungsu0717/dist_repository
         token: ${{ secrets.ACTIONS_PAT }}
     
     - name: Upload release assets to dist repo
       id: upload_release_assets_dist_repo
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_name: jungsu0717/dist-repository
+        repo_name: jungsu0717/dist_repository
         repo_token: ${{ secrets.ACTIONS_PAT }}
         file: ./uivat.zip
         asset_name: uivat.zip
