@@ -48,31 +48,29 @@ jobs:
       uses: mathieudutour/github-tag-action@v6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        tag_prefix: "v" # 태그 접두사 (v1.0.0 형태)
-        versioning-strategy: auto  # 자동으로 버전 증가
-        commit-message: "${{ github.event.head_commit.message }}"  # 커밋 메시지를 사용하여 버전 증가
           
     # 7. Github release 생성
     - name: Create GitHub release
       id: create_release
-      uses: actions/create-release@v1
+      uses: ncipollo/release-action@v1
       with:
-        tag_name: ${{ steps.tag_version.outputs.new_tag }}
-        release_name: Release ${{ steps.tag_version.outputs.new_tag }}
-        body: 'Release notes'
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: Release ${{ steps.tag_version.outputs.new_tag }}
+        body: ${{ steps.tag_version.outputs.changelog }}
     
+    # upload_url: ${{ steps.create_release.outputs.upload_url }}
+    # asset_path: ./uivat.zip               # zip 파일 경로
+    # asset_name: uivat.zip                 # zip 파일 이름
+    # asset_content_type: application/zip
     # 8. 빌드 결과 업로드
     - name: Upload release assets
       id: upload-release-assets
-      uses: actions/upload-release-asset@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: svenstaro/upload-release-action@v2
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./uivat.zip               # zip 파일 경로
-        asset_name: uivat.zip                 # zip 파일 이름
-        asset_content_type: application/zip
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./uivat.zip
+        asset_name: uivat.zip
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: "This is my release text"
+        
