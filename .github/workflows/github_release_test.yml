@@ -62,6 +62,7 @@ jobs:
     # asset_path: ./uivat.zip               # zip 파일 경로
     # asset_name: uivat.zip                 # zip 파일 이름
     # asset_content_type: application/zip
+    # tag: ${{ github.ref }}
     # 8. 빌드 결과 업로드
     - name: Upload release assets
       id: upload-release-assets
@@ -70,7 +71,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ./uivat.zip
         asset_name: uivat.zip
-        tag: ${{ github.ref }}
+        tag: ${{ steps.tag_version.outputs.new_tag }}
         overwrite: true
         body: "This is my release text"
         
