@@ -35,6 +35,11 @@ jobs:
       shell: powershell
       run: |
         Compress-Archive -Path myfolder\* -DestinationPath uivat.zip
+
+    - name: Verify ZIP file
+      shell: bash
+      run: |
+        ls -lh uivat.zip
     
     # 2. Bump version and push the tag
     - name: Bump version and push tag
