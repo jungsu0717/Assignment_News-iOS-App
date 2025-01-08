@@ -56,7 +56,11 @@ jobs:
       with:
         tag: ${{ steps.tag_version.outputs.new_tag }}
         name: Release ${{ steps.tag_version.outputs.new_tag }}
-        body: ${{ steps.tag_version.outputs.changelog }}
+        body:  |
+          ## What's Changed
+          ${{ steps.tag_version.outputs.changelog }}
+          ---
+          ${{ steps.tag_version.outputs.changelog }}
     
     # upload_url: ${{ steps.create_release.outputs.upload_url }}
     # asset_path: ./uivat.zip               # zip 파일 경로
