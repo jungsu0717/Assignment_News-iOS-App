@@ -73,5 +73,4 @@ jobs:
         asset_name: uivat.zip
         tag: ${{ steps.tag_version.outputs.new_tag }}
         overwrite: true
-        body: "This is my release text"
         
