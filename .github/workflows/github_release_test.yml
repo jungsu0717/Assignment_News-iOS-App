@@ -82,7 +82,7 @@ jobs:
         body: |
           ## What's Changed
           ${{ steps.tag_version.outputs.changelog }}
-        repo: jungsu0717/dist_repository
+        repo: dist_repository
         token: ${{ secrets.ACTIONS_PAT }}
     
     - name: Upload release assets to dist repo
