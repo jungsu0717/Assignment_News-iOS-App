@@ -62,11 +62,6 @@ jobs:
           ---
           ${{ steps.tag_version.outputs.changelog }}
     
-    # upload_url: ${{ steps.create_release.outputs.upload_url }}
-    # asset_path: ./uivat.zip               # zip 파일 경로
-    # asset_name: uivat.zip                 # zip 파일 이름
-    # asset_content_type: application/zip
-    # tag: ${{ github.ref }}
     # 8. 빌드 결과 업로드
     - name: Upload release assets
       id: upload-release-assets
@@ -77,4 +72,25 @@ jobs:
         asset_name: uivat.zip
         tag: ${{ steps.tag_version.outputs.new_tag }}
         overwrite: true
-        
+
+    - name: Create GitHub release in dist repo
+      id: create_release_dist_repo
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: uivat_${{ steps.tag_version.outputs.new_tag }}
+        body: |
+          ## What's Changed
+          ${{ steps.tag_version.outputs.changelog }}
+        repo: jungsu0717/dist-repository
+        token: ${{ secrets.ACTIONS_PAT }}
+    
+    - name: Upload release assets to dist repo
+      id: upload_release_assets_dist_repo
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_name: jungsu0717/dist-repository
+        repo_token: ${{ secrets.ACTIONS_PAT }}
+        file: ./uivat.zip
+        asset_name: uivat.zip
+        tag: ${{ steps.tag_version.outputs.new_tag }}
