@@ -49,18 +49,18 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
           
-    # 7. Github release 생성
-    - name: Create GitHub release
-      id: create_release
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: Release ${{ steps.tag_version.outputs.new_tag }}
-        body:  |
-          ## What's Changed
-          ${{ steps.tag_version.outputs.changelog }}
-          ---
-          ${{ steps.tag_version.outputs.changelog }}
+    # # 7. Github release 생성
+    # - name: Create GitHub release
+    #   id: create_release
+    #   uses: ncipollo/release-action@v1
+    #   with:
+    #     tag: ${{ steps.tag_version.outputs.new_tag }}
+    #     name: Release ${{ steps.tag_version.outputs.new_tag }}
+    #     body:  |
+    #       ## What's Changed
+    #       ${{ steps.tag_version.outputs.changelog }}
+    #       ---
+    #       ${{ steps.tag_version.outputs.changelog }}
     
     # 8. 빌드 결과 업로드
     - name: Upload release assets
@@ -72,26 +72,32 @@ jobs:
         asset_name: uivat.zip
         tag: ${{ steps.tag_version.outputs.new_tag }}
         overwrite: true
-
-    - name: Create GitHub release in dist repo
-      id: create_release_dist_repo
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: uivat_${{ steps.tag_version.outputs.new_tag }}
+        release_name: Test v${{ steps.tag_version.outputs.new_tag }}
         body: |
           ## What's Changed
           ${{ steps.tag_version.outputs.changelog }}
-        repo: dist_repository
-        token: ${{ secrets.ACTIONS_PAT }}
+          ---
+          ${{ steps.tag_version.outputs.changelog }}
+
+    # - name: Create GitHub release in dist repo
+    #   id: create_release_dist_repo
+    #   uses: ncipollo/release-action@v1
+    #   with:
+    #     tag: ${{ steps.tag_version.outputs.new_tag }}
+    #     name: uivat_${{ steps.tag_version.outputs.new_tag }}
+    #     body: |
+    #       ## What's Changed
+    #       ${{ steps.tag_version.outputs.changelog }}
+    #     repo: dist_repository
+    #     token: ${{ secrets.ACTIONS_PAT }}
 
     
-    - name: Upload release assets to dist repo
-      id: upload_release_assets_dist_repo
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_name: jungsu0717/dist_repository
-        repo_token: ${{ secrets.ACTIONS_PAT }}
-        file: ./uivat.zip
-        asset_name: uivat.zip
-        tag: ${{ steps.tag_version.outputs.new_tag }}
+    # - name: Upload release assets to dist repo
+    #   id: upload_release_assets_dist_repo
+    #   uses: svenstaro/upload-release-action@v2
+    #   with:
+    #     repo_name: jungsu0717/dist_repository
+    #     repo_token: ${{ secrets.ACTIONS_PAT }}
+    #     file: ./uivat.zip
+    #     asset_name: uivat.zip
+    #     tag: ${{ steps.tag_version.outputs.new_tag }}
