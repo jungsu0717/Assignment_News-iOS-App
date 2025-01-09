@@ -46,6 +46,8 @@ jobs:
       run: |
         conda activate uivat
         conda list
+        cd
+        dir
         mkdir myfolder
         echo "This is file 1" > myfolder/file1.txt
         echo "This is file 2" > myfolder/file2.txt
