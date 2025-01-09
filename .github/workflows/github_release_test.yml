@@ -44,6 +44,7 @@ jobs:
     - name: Create a folder and compress it into a ZIP
       shell: cmd
       run: |
+        conda list
         mkdir myfolder
         echo "This is file 1" > myfolder/file1.txt
         echo "This is file 2" > myfolder/file2.txt
@@ -51,11 +52,13 @@ jobs:
     - name: Compress files into a ZIP
       shell: powershell
       run: |
+        conda list
         Compress-Archive -Path myfolder\* -DestinationPath uivat.zip
 
     - name: Verify ZIP file
       shell: bash
       run: |
+        conda list
         ls -lh uivat.zip
         unzip -l uivat.zip
     
