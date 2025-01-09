@@ -44,6 +44,7 @@ jobs:
     - name: Create a folder and compress it into a ZIP
       shell: cmd
       run: |
+        conda activate uivat
         conda list
         mkdir myfolder
         echo "This is file 1" > myfolder/file1.txt
