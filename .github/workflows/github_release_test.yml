@@ -44,7 +44,6 @@ jobs:
     - name: Create a folder and compress it into a ZIP
       shell: powershell
       run: |
-        conda activate uivat
         conda list
         ls
         cd
