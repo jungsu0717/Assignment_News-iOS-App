@@ -64,7 +64,17 @@ jobs:
         name: uivat_${{ steps.tag_version.outputs.new_tag }}
         artifacts: "uivat.zip"
         generateReleaseNotes: true
-        
+   
+    - name: Create GitHub release in dist repo
+      id: create_release_dist_repo
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: uivat_${{ steps.tag_version.outputs.new_tag }}
+        artifacts: "uivat.zip"
+        generateReleaseNotes: true
+        repo: dist_repository
+        token: ${{ secrets.ACTIONS_PAT }}     
     
     # # 8. 빌드 결과 업로드
     # - name: Upload release assets
@@ -83,17 +93,6 @@ jobs:
     #       ---
     #       ${{ steps.tag_version.outputs.changelog }}
 
-    # - name: Create GitHub release in dist repo
-    #   id: create_release_dist_repo
-    #   uses: ncipollo/release-action@v1
-    #   with:
-    #     tag: ${{ steps.tag_version.outputs.new_tag }}
-    #     name: uivat_${{ steps.tag_version.outputs.new_tag }}
-    #     body: |
-    #       ## What's Changed
-    #       ${{ steps.tag_version.outputs.changelog }}
-    #     repo: dist_repository
-    #     token: ${{ secrets.ACTIONS_PAT }}
 
     
     # - name: Upload release assets to dist repo
