@@ -48,36 +48,39 @@ jobs:
       uses: mathieudutour/github-tag-action@v6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-          
-    # # 7. Github release 생성
-    # - name: Create GitHub release
-    #   id: create_release
-    #   uses: ncipollo/release-action@v1
+
+    # body:  |
+    # ## What's Changed
+    # ${{ steps.tag_version.outputs.changelog }}
+    # ---
+    # ${{ steps.tag_version.outputs.changelog }}
+    # 7. Github release 생성
+    - name: Create GitHub release
+      id: create_release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: uivat_${{ steps.tag_version.outputs.new_tag }}
+        artifacts: "uivat.zip"
+        generateReleaseNotes: true
+        
+    
+    # # 8. 빌드 결과 업로드
+    # - name: Upload release assets
+    #   id: upload-release-assets
+    #   uses: svenstaro/upload-release-action@v2
     #   with:
+    #     repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #     file: ./uivat.zip
+    #     asset_name: uivat.zip
     #     tag: ${{ steps.tag_version.outputs.new_tag }}
-    #     name: Release ${{ steps.tag_version.outputs.new_tag }}
-    #     body:  |
+    #     overwrite: true
+    #     release_name: Test v${{ steps.tag_version.outputs.new_tag }}
+    #     body: |
     #       ## What's Changed
     #       ${{ steps.tag_version.outputs.changelog }}
     #       ---
     #       ${{ steps.tag_version.outputs.changelog }}
-    
-    # 8. 빌드 결과 업로드
-    - name: Upload release assets
-      id: upload-release-assets
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./uivat.zip
-        asset_name: uivat.zip
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        overwrite: true
-        release_name: Test v${{ steps.tag_version.outputs.new_tag }}
-        body: |
-          ## What's Changed
-          ${{ steps.tag_version.outputs.changelog }}
-          ---
-          ${{ steps.tag_version.outputs.changelog }}
 
     # - name: Create GitHub release in dist repo
     #   id: create_release_dist_repo
