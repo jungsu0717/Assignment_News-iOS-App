@@ -62,9 +62,8 @@ jobs:
         Compress-Archive -Path myfolder\* -DestinationPath uivat.zip
 
     - name: Verify ZIP file
-      shell: bash
+      shell: powershell
       run: |
-        conda list
         ls -lh uivat.zip
         unzip -l uivat.zip
     
