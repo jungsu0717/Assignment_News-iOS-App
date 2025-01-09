@@ -42,10 +42,11 @@ jobs:
         conda env list
 
     - name: Create a folder and compress it into a ZIP
-      shell: cmd
+      shell: powershell
       run: |
         conda activate uivat
         conda list
+        ls
         cd
         dir
         mkdir myfolder
