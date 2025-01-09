@@ -53,6 +53,9 @@ jobs:
       shell: powershell
       run: |
         conda list
+        ls
+        cd
+        dir
         Compress-Archive -Path myfolder\* -DestinationPath uivat.zip
 
     - name: Verify ZIP file
