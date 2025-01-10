@@ -33,39 +33,92 @@ jobs:
         python-version: 3.12.4
      
     # Conda 설치 확인
-    - name: PowerShell
-      shell: powershell
-      run: |
-        conda info
-        conda list
-        conda --version
-        conda env list
-
-    - name: Create a folder and compress it into a ZIP
+    - name: Verify conda
       shell: powershell
       run: |
         conda list
-        ls
-        cd
-        dir
-        mkdir myfolder
-        echo "This is file 1" > myfolder/file1.txt
-        echo "This is file 2" > myfolder/file2.txt
 
-    - name: Compress files into a ZIP
+    # 2. Mesa3D 설치 (Kivy는 openGL 2.0 이상 환경에서 빌드가 가능하지만 가상환경에서는 1.1 버전을 제공하므로, OpenGL 소프트웨어 렌더링 추가)
+    - name: Install Mesa
+      shell: cmd
+      run: |
+        curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
+        "C:\Program Files\7-Zip\7z.exe" x mesa.7z
+
+    # 3. Mesa3D 적용 (가상환경 openGL 대체 적용과 path 설정)
+    - name: Apply Mesa
+      shell: cmd
+      run: |
+        takeown /F C:\Windows\System32\opengl32.dll
+        icacls C:\Windows\System32\opengl32.dll /grant:r "%USERNAME%:F"
+        del C:\Windows\System32\opengl32.dll
+        mklink C:\Windows\System32\opengl32.dll "x64\opengl32.dll"
+    
+        takeown /F C:\Windows\System32\libglapi.dll
+        icacls C:\Windows\System32\libglapi.dll /grant:r "%USERNAME%:F"
+        del C:\Windows\System32\libglapi.dll
+        mklink C:\Windows\System32\libglapi.dll "x64\libglapi.dll"
+
+        echo PATH=%CD%\x64;%PATH% >> %GITHUB_ENV%
+
+    # 5. 의존성 설치
+    - name: Install dependencies
+      shell: powershell
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+        conda list
+        
+    # 4. Python 코드 작성
+    - name: Create Python script
+      run: |
+        echo "def main():" > main.py
+        echo "    print('Hello from GitHub Actions!')" >> main.py
+        echo "if __name__ == '__main__':" >> main.py
+        echo "    main()" >> main.py
+        
+    # 6. App 빌드 및 패키징
+    - name: Build executable
       shell: powershell
       run: |
         conda list
-        ls
-        cd
-        dir
-        Compress-Archive -Path myfolder\* -DestinationPath uivat.zip
+        pyinstaller --onefile main.py
 
-    - name: Verify ZIP file
+    # 7. zip 으로 압축
+    - name: Compress 'dist' directory into a zip
       shell: powershell
       run: |
-        ls -lh uivat.zip
-        unzip -l uivat.zip
+        conda list
+        Compress-Archive -Path dist\* -DestinationPath uivat.zip
+
+        
+
+    # - name: Create a folder and compress it into a ZIP
+    #   shell: powershell
+    #   run: |
+    #     conda list
+    #     ls
+    #     cd
+    #     dir
+    #     mkdir myfolder
+    #     echo "This is file 1" > myfolder/file1.txt
+    #     echo "This is file 2" > myfolder/file2.txt
+
+    # - name: Compress files into a ZIP
+    #   shell: powershell
+    #   run: |
+    #     conda list
+    #     ls
+    #     cd
+    #     dir
+    #     Compress-Archive -Path myfolder\* -DestinationPath uivat.zip
+
+    # - name: Verify ZIP file
+    #   shell: powershell
+    #   run: |
+    #     ls -lh uivat.zip
+    #     unzip -l uivat.zip
     
     # 2. Bump version and push the tag
     - name: Bump version and push tag
@@ -89,16 +142,16 @@ jobs:
         artifacts: "uivat.zip"
         generateReleaseNotes: true
    
-    - name: Create GitHub release in dist repo
-      id: create_release_dist_repo
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ steps.tag_version.outputs.new_tag }}
-        name: uivat_${{ steps.tag_version.outputs.new_tag }}
-        artifacts: "uivat.zip"
-        generateReleaseNotes: true
-        repo: dist_repository
-        token: ${{ secrets.ACTIONS_PAT }}     
+    # - name: Create GitHub release in dist repo
+    #   id: create_release_dist_repo
+    #   uses: ncipollo/release-action@v1
+    #   with:
+    #     tag: ${{ steps.tag_version.outputs.new_tag }}
+    #     name: uivat_${{ steps.tag_version.outputs.new_tag }}
+    #     artifacts: "uivat.zip"
+    #     generateReleaseNotes: true
+    #     repo: dist_repository
+    #     token: ${{ secrets.ACTIONS_PAT }}     
     
     # # 8. 빌드 결과 업로드
     # - name: Upload release assets
