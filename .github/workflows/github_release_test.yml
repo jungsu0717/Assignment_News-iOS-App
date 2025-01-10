@@ -45,6 +45,7 @@ jobs:
         curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/20.3.2/mesa3d-20.3.2-release-msvc.7z
         "C:\Program Files\7-Zip\7z.exe" x mesa.7z
 
+    # echo PATH=%CD%\x64;%PATH% >> %GITHUB_ENV%
     # 3. Mesa3D 적용 (가상환경 openGL 대체 적용과 path 설정)
     - name: Apply Mesa
       shell: cmd
@@ -59,7 +60,6 @@ jobs:
         del C:\Windows\System32\libglapi.dll
         mklink C:\Windows\System32\libglapi.dll "x64\libglapi.dll"
 
-        echo PATH=%CD%\x64;%PATH% >> %GITHUB_ENV%
 
     # 5. 의존성 설치
     - name: Install dependencies
