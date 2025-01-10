@@ -77,6 +77,11 @@ jobs:
         echo "    print('Hello from GitHub Actions!')" >> main.py
         echo "if __name__ == '__main__':" >> main.py
         echo "    main()" >> main.py
+
+    - name: Check pyinstaller path
+      shell: powershell
+      run: |
+        where.exe pyinstaller
         
     # 6. App 빌드 및 패키징
     - name: Build executable
